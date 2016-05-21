@@ -10,6 +10,12 @@ class DeclReflection implements DeclContainer {
 		this.obj = obj;
 		this.clazz = obj.getClass();
 	}
+	
+	@Override
+	public void putObject(String name, Object obj)
+	{
+		put(name, obj);
+	}
 
 	@Override
 	public void putString(String name, String str) 

@@ -19,5 +19,7 @@ public interface DeclContainer {
 	
 	void putShort(String name, short s);
 	
+	void putObject(String name, Object obj);
+	
 	boolean contains(String name);
 }

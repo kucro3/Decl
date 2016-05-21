@@ -31,6 +31,14 @@ public class Decl {
 		return obj;
 	}
 	
+	public static Object toObject(Object obj, DeclObject decl)
+	{
+		DeclReflection reflect = new DeclReflection(obj);
+		for(Map.Entry<String, DeclElement> entry : decl.objs.entrySet())
+			reflect.put(entry.getKey(), entry.getValue().get());
+		return obj;
+	}
+	
 	public static Object toObject(Object obj, File file) throws IOException
 	{
 		DeclReflection reflect = new DeclReflection(obj);
