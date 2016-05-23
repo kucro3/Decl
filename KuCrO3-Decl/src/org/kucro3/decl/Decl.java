@@ -24,6 +24,13 @@ public class Decl {
 		return obj;
 	}
 	
+	public static DeclObject toDecl(InputStream is) throws IOException
+	{
+		DeclObject obj = new DeclObject();
+		to(obj, is);
+		return obj;
+	}
+	
 	public static Object toObject(Object obj, String... lines)
 	{
 		DeclReflection reflect = new DeclReflection(obj);
@@ -46,6 +53,13 @@ public class Decl {
 		return obj;
 	}
 	
+	public static Object toObject(Object obj, InputStream is) throws IOException
+	{
+		DeclReflection reflect = new DeclReflection(obj);
+		to(reflect, is);
+		return obj;
+	}
+	
 	private static void to(DeclContainer container, String[] lines)
 	{
 		for(int i = 0; i < lines.length;)
@@ -57,8 +71,18 @@ public class Decl {
 	
 	private static void to(DeclContainer container, File file) throws IOException
 	{
+		to(container, new BufferedReader(new FileReader(file)));
+	}
+	
+	private static void to(DeclContainer container, InputStream is) throws IOException
+	{
+		to(container, new BufferedReader(new InputStreamReader(is)));
+	}
+	
+	private static void to(DeclContainer container, BufferedReader r) throws IOException
+	{
 		String line;
-		BufferedReader reader = new BufferedReader(new FileReader(file));
+		BufferedReader reader = r;
 		List<String> lines = new ArrayList<>();
 		while((line = reader.readLine()) != null)
 			lines.add(line);
